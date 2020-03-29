@@ -1,8 +1,11 @@
 
 import {Router} from "express"
+import {UserService} from "../services"
 
-const registerUser = (req, resp) => {
-    resp.json({})
+const registerUser = async (req, resp) => {
+    const {body} = req
+    const response = await UserService.register(body)
+    resp.json({response})
 }
 
 
