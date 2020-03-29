@@ -3,7 +3,7 @@ import {Router} from "express"
 
 const branch = process.env.BRANCH || "dev"
 const head = process.env.HEAD || "dev"
-const commit = process.env.COMIT_REF || "dev"
+const commit = process.env.COMMIT_REF || "dev"
 
 
 const ping = (req, resp) => {
