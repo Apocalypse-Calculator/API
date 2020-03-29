@@ -6,17 +6,17 @@ services:
       - "27017:27017"
     volumes:
       - data-volume:/data/db
-  # functions:
-  #   build: .
-  #   volumes:
-  #     - "./functions:/usr/src/app/functions"
-  #     - "./package.json:/usr/src/app/package.json"
-  #   ports:
-  #     - "9000:9000"
-  #   environment:
-  #     - MONGO_URL="mongodb://localhost:27017"
-  #   depends_on:
-  #     - mongo
+  functions:
+    build: .
+    volumes:
+      - "./functions:/usr/src/app/functions"
+      - "./package.json:/usr/src/app/package.json"
+    ports:
+      - "9000:9000"
+    environment:
+      - MONGO_URL="mongodb://localhost:27017"
+    depends_on:
+      - mongo
 
 volumes:
   data-volume:
