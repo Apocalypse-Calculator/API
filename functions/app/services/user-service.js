@@ -1,8 +1,16 @@
-import {User} from "../models"
+import config from "../config"
+import { MongoClient } from "mongodb"
+
+const userCollection = "users"
 
 const register = async (data) => {
-    const user = new User({...data})
-    return await user.save()
+    const { connectionString, databaseName } = config
+    MongoClient.connect(connectionString, { useUnifiedTopology: true }, (err, client) => {
+        const User = client.db(databaseName).collection(userCollection)
+        User.insertOne(data).then(() => {
+            client.close()
+        })
+    })
 }
 
 export const UserService = {

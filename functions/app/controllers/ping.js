@@ -1,11 +1,14 @@
 import { Router } from "express"
-import mongoose from "../database"
+import { getConnection } from "../services"
 
-const ping = (req, resp) => {
+const ping = async (req, resp) => {
+    const client = await getConnection()
+    const isDatabaseConnected = client.isConnected()
     resp.json({
         status: "OK",
-        databaseStatus: mongoose.connection.readyState
+        isDatabaseConnected
     })
+    await db.close()
 }
 
 export const getPingRoutes = () => {
