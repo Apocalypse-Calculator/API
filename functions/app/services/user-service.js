@@ -1,13 +1,12 @@
 import config from "../config"
-import { MongoClient } from "mongodb"
 import { getConnection } from "./database-service"
 
 const userCollection = "users"
 
 const register = async (data) => {
-    const { databaseName } = config
-    const client = await getConnection(userCollection)
-    const User = client.db(databaseName).collection(databaseName)
+    const { dbName } = config
+    const client = await getConnection()
+    const User = client.db(dbName).collection(userCollection)
     await User.insertOne(data)
     await client.close()
 }
