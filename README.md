@@ -1,15 +1,13 @@
-## Overview
+# Restock API
 
-[Api Routes Documentation](https://nextjs.org/docs/api-routes/introduction)
+This is the backend of the restock app where support, the server is deployed as a netlify function.
 
-[Micro Middleware](https://github.com/amio/awesome-micro) are compatible with these routes
+## Local Environment Setup
 
-There is an incoming payload size limit of 5mb that can't be changed.
-
-You cannot persist data to the drive. There is a /tmp folder, but it is cleared when the function terminates.
-
-## Usage
-
-Run `yarn` to install dependencies
-
-Afterwards, run `yarn dev` to start building
+1. `git clone git@github.com:Apocalypse-Calculator/API.git`
+2. npm i -g yarn
+3. yarn install
+4. create .env file ( you can use the template) and provide the credentials of the mongodb instance
+5. if you want to run your app locally:
+   i. `yarn build`
+   ii. `yarn start`
