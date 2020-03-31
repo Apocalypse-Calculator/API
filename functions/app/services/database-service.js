@@ -1,16 +1,13 @@
-import { MongoClient } from "mongodb"
-import config from "../config"
+import mongoose from 'mongoose';
+import config from '../config';
 
-const makeConnectionString = () => {
-    const { dbUser, dbPassword, dbHost, dbName } = config
-    return `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`
-}
-
-
-export const getConnection = async (collectionName) => {
-    const connectionString = makeConnectionString()
-    const client = await MongoClient.connect(connectionString, {
-        useUnifiedTopology: true
-    })
-    return client
-}
+const { dbUser, dbPassword, dbHost, dbName } = config;
+export const getConnection = async () => {
+  const encodedUser = encodeURI(dbUser);
+  const encodedPassword = encodeURI(dbPassword);
+  const url = `mongodb+srv://${encodedUser}:${encodedPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`;
+  return await mongoose.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+};
