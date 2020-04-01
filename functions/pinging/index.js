@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import config from '../config';
-import { getConnection } from "../storage"
+import config from '../core/config';
+import { getConnection } from "../core/storage"
 import mongoose from "mongoose"
 
 const DBStatus = {

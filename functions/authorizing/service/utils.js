@@ -1,8 +1,8 @@
 import passport from "passport"
 import jwt from "jsonwebtoken"
-import config from "../../config"
+import config from "../../core/config"
 import bcrypt from "bcryptjs"
-import { UserRepository } from "../../storage/repository";
+import { UserRepository } from "../../core/storage/repository";
 
 const { jwtSecret } = config;
 

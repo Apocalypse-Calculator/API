@@ -1,7 +1,7 @@
 import passport from "passport"
 import passportJWT from "passport-jwt"
-import config from "../../../config"
-import { UserRepository } from "../../../storage"
+import config from "../../../core/config"
+import { UserRepository } from "../../../core/storage"
 
 const { jwtSecret } = config;
 const { Strategy: JWTStrategy } = passportJWT;

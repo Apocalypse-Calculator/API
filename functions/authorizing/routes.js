@@ -1,11 +1,10 @@
 import joi from "@hapi/joi"
 import { utils } from "./service"
-import { UserRepository, getConnection } from "../storage"
+import { UserRepository, getConnection } from "../core/storage"
 
 const schema = joi.object({
     email: joi.string().email().required(),
     password: joi.string().required(),
-    confirm_password: joi.ref("password"),
     display_name: joi.string(),
     location: joi.object({
         city: joi.string(),
@@ -32,9 +31,15 @@ export const registerUser = async (req, resp) => {
                 displayName,
                 location
             })
-            const { _id: id, confirmationSentAt, confirmedAt } = user
-            resp.status(201)
-            resp.json({ email, id, confirmationSentAt, confirmedAt, location, displayName })
+
+            if (user.error) {
+                resp.status(422)
+                resp.json({ error: user.error })
+            } else {
+                const { _id: id, confirmationSentAt, confirmedAt } = user
+                resp.status(201)
+                resp.json({ email, id, confirmationSentAt, confirmedAt, location, displayName })
+            }
         }
     } catch (err) {
         console.log(err)

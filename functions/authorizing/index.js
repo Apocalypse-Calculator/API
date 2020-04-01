@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import { registerUser } from "./routes";
-import config from "../config"
+import config from "../core/config"
 import { initAuthentication } from "./service";
 
 
