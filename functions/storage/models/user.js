@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import { model, Schema } from 'mongoose';
 
 const userCollection = 'users';
 
-export const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   email: String,
   password: String,
   displayName: String,
@@ -17,3 +17,5 @@ export const UserSchema = new mongoose.Schema({
     country: String,
   },
 });
+
+export const UserModel = model('users', UserSchema);

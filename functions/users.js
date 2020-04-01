@@ -1,7 +1,7 @@
 import serverless from 'serverless-http';
-import createApp from './app';
+import createApp from './authorizing';
 
-const functionName = 'server';
+const functionName = 'users';
 
 const app = createApp(functionName);
 
