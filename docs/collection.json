@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "c1be0d2c-89a9-4a2c-9515-30a489822c5d",
+		"name": "restock-api",
+		"description": "# Restock API\n\nThe API's described here support the backend of the restock webapp.\n\n## Supported Endpoints \nSo far here are the enpoints that the backend serves: \n\n- Ping the server and return its database status\n- Authorizations that include:\n  - Registering a new user via vanilla email / password\n  - Login a user ( email / password authentication )\n  - Get current user from jwt token\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pinging",
+			"item": [
+				{
+					"name": "ping server",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "# Ping \n\npings the server to check database status\n\n\nRespondes with connneciton status ( connected, disconnected, connecting, disconnecting)"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "authorizing",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"user@gmail.com\",\n\t\"password\": \"password\",\n\t\"displayName\": \"Restock User\",\n\t\"location\": {\n\t\t\"city\": \"Toronto\",\n\t\t\"country\": \"Canada\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						},
+						"description": "# Registration Endpoint \n\nPOST endpoint\nRegisters a user via email and password \n\n\n## Parameters \n\n\n| parameter   \t| type   \t| required? \t| description                                 \t| example                                                   \t|\n|-------------\t|--------\t|-----------\t|---------------------------------------------\t|-----------------------------------------------------------\t|\n| email       \t| string \t| yes       \t| users email                                 \t| bob@gmail.com                                             \t|\n| password    \t| string \t| yes       \t| users password                              \t| BobIsCool                                                 \t|\n| displayName \t| string \t| no        \t| user's display name in the app / web        \t| Bob Smith                                                 \t|\n| location    \t| object \t| no        \t| contains user location ( city and country ) \t| ```json {  \"city\" : \"Toronto\",  \"country\": \"Canada\", }``` \t|\n\n\n## Repsonse\nWill respond back with user info if created, otherwise with validation errors."
+					},
+					"response": [
+						{
+							"name": "Registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"user@gmail.com\",\n\t\"password\": \"password\",\n\t\"displayName\": \"Restock User\",\n\t\"location\": {\n\t\t\"city\": \"Toronto\",\n\t\t\"country\": \"Canada\"\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "246"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"f6-OUQI+pQmKaQoL+8Qw+Nn9NfRJmw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 Apr 2020 19:34:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"updatedAt\": null,\n        \"confirmedAt\": null,\n        \"confirmationSentAt\": null,\n        \"email\": \"user@gmail.com\",\n        \"displayName\": \"Restock User\",\n        \"location\": {\n            \"city\": \"Toronto\",\n            \"country\": \"Canada\"\n        },\n        \"createdAt\": \"2020-04-04T19:34:08.720Z\",\n        \"id\": \"5e88e130cf2b5a0d44f37b20\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Auth via email / password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"bob@gmail.com\",\n\t\"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						},
+						"description": "# Login Via User email and password\n\nThis endpoint is intended to be called to login the user with an existing email and password\n\n\n## Request Parameters\n\n| parameter   \t| type   \t| required? \t| description                                 \t| example                                                   \t|\n|-------------\t|--------\t|-----------\t|---------------------------------------------\t|-----------------------------------------------------------\t|\n| email       \t| string \t| yes       \t| users email                                 \t| bob@gmail.com                                             \t|\n| password    \t| string \t| yes       \t| users password                              \t| BobIsCool                                                 \t|\n| displayName \t| string \t| no        \t| user's display name in the app / web        \t| Bob Smith                                                 \t|\n| location    \t| object \t| no        \t| contains user location ( city and country ) \t| ```json {  \"city\" : \"Toronto\",  \"country\": \"Canada\", }``` \t|\n\n\n\n## Response\n\nIf successful it will generate a JWT token with 1 hour expiry time, and the token will be placed in the header of the response."
+					},
+					"response": [
+						{
+							"name": "Auth via email / password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"bob@gmail.com\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "JWT",
+									"value": "JWT_TOKEN",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"user\": {\n        \"updatedAt\": null,\n        \"confirmedAt\": null,\n        \"confirmationSentAt\": null,\n        \"email\": \"bob@gmail.com\",\n        \"createdAt\": \"2020-04-04T18:39:13.115Z\",\n        \"id\": \"5e88d45147ed610acb7fc361\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get current user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "# Current user\n\nThis api fetches info on the current user\n\n# Request Parameters\nThis request only requires a JWT to be inserted into the request header.\n\n\n# Repsonse\nIf the JWT token is valid , it will return the current info of the user, otherwise an indication on why it failed"
+					},
+					"response": [
+						{
+							"name": "get current user - success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "JWT",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVwZGF0ZWRBdCI6bnVsbCwiY29uZmlybWVkQXQiOm51bGwsImNvbmZpcm1hdGlvblNlbnRBdCI6bnVsbCwiX2lkIjoiNWU4OGQ0NTE0N2VkNjEwYWNiN2ZjMzYxIiwiZW1haWwiOiJlbG5haGFzLmFobWVkK25ldzExQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJFljU0JxMVVLcXdCYXNpdE5TSjFqN09xbTZQMU9kUFNBSXBaMnZ0Mm1vT2hYc2lQQkkwdDhLIiwiY3JlYXRlZEF0IjoiMjAyMC0wNC0wNFQxODozOToxMy4xMTVaIiwiX192IjowfSwiaWF0IjoxNTg2MDI3MTcwLCJleHAiOjE1ODYwMzA3NzB9.ZSBKrlE91Js-iMLjoxtjGeNkRTqJ0nuffR0kzeGQU18",
+										"description": "the jwt token issued from one of the login requests",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/users/me",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "192"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"c0-QYsg9PiEFjszUUqdrOPkCXrcDtk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 Apr 2020 19:47:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"updatedAt\": null,\n        \"confirmedAt\": null,\n        \"confirmationSentAt\": null,\n        \"_id\": \"5e88d45147ed610acb7fc361\",\n        \"email\": \"elnahas.ahmed+new11@gmail.com\",\n        \"createdAt\": \"2020-04-04T18:39:13.115Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "# Authorizing\n\nEndpoints to manage user registration , authentication , password resets ... etc. \n\n",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "apikey"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "983dca62-a73b-41b0-a7e9-0ffab2559218",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5d626ca4-d415-4022-bdcd-da7321d36982",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "537e264e-7be9-4f4d-bde1-b6971772639f",
+			"key": "base_url",
+			"value": "http://localhost:9000/.netlify/functions",
+			"type": "string"
+		},
+		{
+			"id": "8b7c1bcc-5f85-40c7-94b6-16e502e1ff27",
+			"key": "\n",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	],
+	"protocolProfileBehavior": {}
+}

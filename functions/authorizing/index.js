@@ -2,13 +2,13 @@ import express, { Router } from "express";
 import bodyParser from "body-parser";
 import passport from "passport";
 import cookieParser from "cookie-parser";
-import { registerUser } from "./routes";
+import { registerUser, loginUser, getCurrentUser } from "./routes";
 import config from "../core/config"
 import { initAuthentication } from "./service";
 
 
 
-const createApp = functionName => {
+const createApp = (functionName) => {
     const app = express();
     const router = Router();
 
@@ -19,6 +19,8 @@ const createApp = functionName => {
 
     const routerBasePath = `${config.basePath}/${functionName}`;
     router.post("/register", registerUser);
+    router.post("/login", loginUser);
+    router.get("/me", getCurrentUser);
 
     initAuthentication(app)
 

@@ -18,4 +18,6 @@ const UserSchema = new Schema({
   },
 });
 
+UserSchema.set('toObject', { virtuals: true });
+
 export const UserModel = model('users', UserSchema);

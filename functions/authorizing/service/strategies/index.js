@@ -1,4 +1,2 @@
-import { strategy as JWTStrategy } from "./jwt"
-export {
-    JWTStrategy
-}
+import { strategy as JWTStrategy } from './jwt';
+export { JWTStrategy };
