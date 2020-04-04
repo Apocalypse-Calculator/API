@@ -15,7 +15,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{base_url}}/ping",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ping"
+							]
 						},
 						"description": "# Ping \n\npings the server to check database status\n\n\nRespondes with connneciton status ( connected, disconnected, connecting, disconnecting)"
 					},
@@ -34,7 +40,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"user@gmail.com\",\n\t\"password\": \"password\",\n\t\"displayName\": \"Restock User\",\n\t\"location\": {\n\t\t\"city\": \"Toronto\",\n\t\t\"country\": \"Canada\"\n\t}\n}",
+							"raw": "{\n\t\"email\": \"elnahas.ahmed+new20@gmail.com\",\n\t\"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -51,7 +57,7 @@
 								"register"
 							]
 						},
-						"description": "# Registration Endpoint \n\nPOST endpoint\nRegisters a user via email and password \n\n\n## Parameters \n\n\n| parameter   \t| type   \t| required? \t| description                                 \t| example                                                   \t|\n|-------------\t|--------\t|-----------\t|---------------------------------------------\t|-----------------------------------------------------------\t|\n| email       \t| string \t| yes       \t| users email                                 \t| bob@gmail.com                                             \t|\n| password    \t| string \t| yes       \t| users password                              \t| BobIsCool                                                 \t|\n| displayName \t| string \t| no        \t| user's display name in the app / web        \t| Bob Smith                                                 \t|\n| location    \t| object \t| no        \t| contains user location ( city and country ) \t| ```json {  \"city\" : \"Toronto\",  \"country\": \"Canada\", }``` \t|\n\n\n## Repsonse\nWill respond back with user info if created, otherwise with validation errors."
+						"description": "# Registration Endpoint \n\nPOST endpoint\nRegisters a user via email and password \n\n\n## Parameters \n\n\n| parameter   \t| type   \t| required? \t| description                                 \t| example                                                   \t|\n| :---\t| :---\t| :---\t| :---\t| :---\t|\n| email       \t| string \t| yes       \t| users email                                 \t| bob@gmail.com                                             \t|\n| password    \t| string \t| yes       \t| users password                              \t| BobIsCool                                                 \t|\n| displayName \t| string \t| no        \t| user's display name in the app / web        \t| Bob Smith                                                 \t|\n| location    \t| object \t| no        \t| contains user location ( city and country ) \t| {  \"city\" : \"Toronto\",  \"country\": \"Canada\"} \t|\n\n\n## Repsonse\nWill respond back with user info if created, otherwise with validation errors."
 					},
 					"response": [
 						{
@@ -120,7 +126,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"bob@gmail.com\",\n\t\"password\": \"password\"\n}",
+							"raw": "{\n\t\"email\": \"elnahas.ahmed+new20@gmail.com\",\n\t\"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,7 +143,7 @@
 								"login"
 							]
 						},
-						"description": "# Login Via User email and password\n\nThis endpoint is intended to be called to login the user with an existing email and password\n\n\n## Request Parameters\n\n| parameter   \t| type   \t| required? \t| description                                 \t| example                                                   \t|\n|-------------\t|--------\t|-----------\t|---------------------------------------------\t|-----------------------------------------------------------\t|\n| email       \t| string \t| yes       \t| users email                                 \t| bob@gmail.com                                             \t|\n| password    \t| string \t| yes       \t| users password                              \t| BobIsCool                                                 \t|\n| displayName \t| string \t| no        \t| user's display name in the app / web        \t| Bob Smith                                                 \t|\n| location    \t| object \t| no        \t| contains user location ( city and country ) \t| ```json {  \"city\" : \"Toronto\",  \"country\": \"Canada\", }``` \t|\n\n\n\n## Response\n\nIf successful it will generate a JWT token with 1 hour expiry time, and the token will be placed in the header of the response."
+						"description": "# Login Via User email and password\n\nThis endpoint is intended to be called to login the user with an existing email and password\n\n\n## Request Parameters\n\n\n| parameter \t| type \t| required? \t| description \t| example \t|\n| :---\t| :---\t| :----\t| :---\t| :---\t|\n| email \t| string \t| yes \t| users email \t| bob@gmail.com \t|\n| password \t| string \t| yes \t| users password \t| BobIsCool \t|\n\n\n\n## Response\n\nIf successful it will generate a JWT token with 1 hour expiry time, and the token will be placed in the header of the response."
 					},
 					"response": [
 						{
@@ -287,13 +293,13 @@
 	],
 	"variable": [
 		{
-			"id": "537e264e-7be9-4f4d-bde1-b6971772639f",
+			"id": "89ae6e48-dccd-4091-bad8-432f2655e12f",
 			"key": "base_url",
 			"value": "http://localhost:9000/.netlify/functions",
 			"type": "string"
 		},
 		{
-			"id": "8b7c1bcc-5f85-40c7-94b6-16e502e1ff27",
+			"id": "965ca8c6-5122-497d-860d-0d308118d948",
 			"key": "\n",
 			"value": "",
 			"type": "string",
