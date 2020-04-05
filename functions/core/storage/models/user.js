@@ -8,16 +8,12 @@ const UserSchema = new Schema({
   displayName: String,
   provider: String,
   providerId: String,
+  firstName: String,
+  lastName: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: null },
   confirmedAt: { type: Date, default: null },
   confirmationSentAt: { type: Date, default: null },
-  location: {
-    city: String,
-    country: String,
-  },
 });
 
-UserSchema.set('toObject', { virtuals: true });
-
-export const UserModel = model('users', UserSchema);
+export const UserModel = model(userCollection, UserSchema);

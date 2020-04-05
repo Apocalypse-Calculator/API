@@ -5,6 +5,7 @@ import * as strategies from './strategies';
 const initAuthentication = (app) => {
   utils.setup();
   strategies.JWTStrategy();
+  strategies.FacebookStrategy();
 };
 
 export { utils, initAuthentication, strategies };

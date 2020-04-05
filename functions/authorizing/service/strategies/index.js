@@ -1,2 +1,3 @@
 import { strategy as JWTStrategy } from './jwt';
-export { JWTStrategy };
+import { strategy as FacebookStrategy } from './facebook';
+export { JWTStrategy, FacebookStrategy };

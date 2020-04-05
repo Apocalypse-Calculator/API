@@ -1,8 +1,9 @@
 import joi from '@hapi/joi';
 import _ from 'lodash';
 import { utils } from './service';
-import { UserRepository, getConnection } from '../core/storage';
+import { UserRepository } from '../core/storage';
 import { verifyPassword, signToken, currentUser } from './service/utils';
+import { json } from 'express';
 
 const schema = joi.object({
   email: joi.string().email().required(),
@@ -23,7 +24,6 @@ const transformUser = (user) => {
 
 export const registerUser = async (req, resp) => {
   const { body } = req;
-  await getConnection();
   try {
     const { value, error } = schema.validate(body, { abortEarly: false });
     if (error) {
@@ -64,7 +64,6 @@ export const loginUser = async (req, resp) => {
   const { body } = req;
 
   try {
-    await getConnection();
     const { value, error } = loginSchema.validate(body, { abortEarly: false });
     if (error) {
       const errors = error.details.map((entry) => entry.message);
@@ -95,7 +94,6 @@ export const loginUser = async (req, resp) => {
 
 export const getCurrentUser = async (req, resp) => {
   try {
-    await getConnection();
     const jwt = req.header('JWT');
     if (jwt) {
       let user = await currentUser(jwt);
@@ -110,4 +108,11 @@ export const getCurrentUser = async (req, resp) => {
     resp.status(500);
     resp.json({ error: err.message });
   }
+};
+
+export const authFacebookCallback = (req, resp) => {
+  const token = signToken(req.user);
+  resp.status(200);
+  resp.set('JWT', token);
+  resp.json({ user: req.user });
 };

@@ -11,31 +11,46 @@ const getUserByEmail = async (email) => {
 const createUser = async ({
   email,
   password,
-  displayName,
   providerId,
   provider,
+  displayName,
   location,
 }) => {
-  const user = await UserModel.findOne({ email });
-  if (user) {
-    return {
-      error: `email ${email} is already registered`,
-    };
-  }
-  return await UserModel.create({
-    email,
-    password,
-    displayName,
-    provider,
-    providerId,
-    location,
+  return new Promise(async (resolve, reject) => {
+    console.log({
+      email,
+      password,
+      providerId,
+      provider,
+      displayName,
+      location,
+    });
+    const user = await UserModel.findOne({ email });
+    if (user) {
+      reject(`email ${email} is already registered`);
+    }
+    resolve(
+      await UserModel.create({
+        email,
+        password,
+        provider,
+        providerId,
+        displayName,
+        location,
+      })
+    );
   });
+};
+
+const getUserByProviderId = async (providerId) => {
+  return await await UserModel.findOne({ providerId }).exec();
 };
 
 const UserRepository = {
   getUserById,
   getUserByEmail,
   createUser,
+  getUserByProviderId,
 };
 
 export { UserRepository };
