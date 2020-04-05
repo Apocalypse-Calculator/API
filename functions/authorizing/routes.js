@@ -114,5 +114,4 @@ export const authFacebookCallback = (req, resp) => {
   const token = signToken(req.user);
   resp.status(200);
   resp.set('JWT', token);
-  resp.json({ user: req.user });
 };
