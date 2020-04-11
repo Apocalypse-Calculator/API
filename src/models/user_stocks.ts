@@ -10,18 +10,19 @@ export interface IUserStock extends Document {
   updatedAt?: Date;
 }
 
-const schema = new Schema({
-  definition: {
-    type: Schema.Types.ObjectId,
-    ref: 'item_definitions',
+const schema = new Schema(
+  {
+    definition: {
+      type: Schema.Types.ObjectId,
+      ref: 'item_definitions',
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+    },
+    amount: Number,
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'users',
-  },
-  amount: Number,
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: null },
-});
+  { timestamps: true }
+);
 
 export const UserStock = model<IUserStock>(collection, schema);

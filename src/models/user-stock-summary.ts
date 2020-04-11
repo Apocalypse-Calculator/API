@@ -10,12 +10,13 @@ export interface IUserStockSummary extends Document {
   updatedAt?: Date;
 }
 
-const schema = new Schema({
-  user: { type: Schema.Types.ObjectId, ref: 'users' },
-  stocks: [{ type: Schema.Types.ObjectId, ref: 'user_items' }],
-  estimates: [],
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: null },
-});
+const schema = new Schema(
+  {
+    user: { type: Schema.Types.ObjectId, ref: 'users' },
+    stocks: [{ type: Schema.Types.ObjectId, ref: 'user_stocks' }],
+    estimates: [],
+  },
+  { timestamps: true }
+);
 
 export const UserStockSummary = model<IUserStockSummary>(collection, schema);

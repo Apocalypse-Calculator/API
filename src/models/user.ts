@@ -21,21 +21,22 @@ export interface IUser extends Document {
   updatedAt?: Date;
 }
 
-const schema = new Schema({
-  email: String,
-  password: String,
-  provider: String,
-  providerId: String,
-  firstName: String,
-  lastName: String,
-  displayName: String,
-  householdSize: Number,
-  location: {
-    city: String,
-    country: String,
+const schema = new Schema(
+  {
+    email: String,
+    password: String,
+    provider: String,
+    providerId: String,
+    firstName: String,
+    lastName: String,
+    displayName: String,
+    householdSize: Number,
+    location: {
+      city: String,
+      country: String,
+    },
   },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: null },
-});
+  { timestamps: true }
+);
 
 export const User = model<IUser>(collection, schema);
