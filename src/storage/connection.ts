@@ -9,5 +9,6 @@ export const getConnection = async () => {
   return await mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   });
 };

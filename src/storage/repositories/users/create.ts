@@ -1,4 +1,4 @@
-import { CreateUserInput } from '~/src/types/dto/user';
+import { CreateUserInput } from '~/src/types/schemas/user';
 import { User } from '~/src/models';
 
 export const create = async (options: any) => {

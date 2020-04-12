@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import { to } from 'await-to-js';
 import joi from '@hapi/joi';
 
-import { IItemDefinition } from '~/src/models';
 import { ItemDefinitionRepository } from '~/src/storage/repositories/item-definitions';
+import { ItemDefinitionSchema } from '~/src/types';
 
 const definitionUpdate = joi.object({
   name: joi.string().min(3).max(50),
@@ -18,7 +18,7 @@ export const updateDefinition = async (req: Request, resp: Response) => {
     return resp.status(422).json({ success: false, errors });
   }
 
-  const [err, definition] = await to<IItemDefinition>(
+  const [err, definition] = await to<ItemDefinitionSchema>(
     ItemDefinitionRepository.upsert(value)
   );
   if (err) {
