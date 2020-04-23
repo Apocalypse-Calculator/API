@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import { User } from '~/src/models';
 
 const getOne = async (conditions: any) => {

@@ -9,5 +9,7 @@ export const deleteDefinition = async (id: string) => {
 };
 
 export const deleteUnit = async (id: string, unitId: string) => {
-  await ItemDefinition.findOneAndDelete({ _id: id, 'units._id': unitId });
+  await ItemDefinition.findByIdAndUpdate(id, {
+    $pull: { units: { _id: unitId } },
+  });
 };

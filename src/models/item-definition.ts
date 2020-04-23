@@ -1,34 +1,46 @@
-import { model, Schema, Document } from 'mongoose';
+import { model, Schema } from 'mongoose';
+import { Document } from 'mongoose';
 
-const collection = 'item_definitions';
+export enum UnitSystem {
+  METRIC = 'metric',
+  IMPERIAL = 'imperial',
+}
 
-export interface Unit {
-  system: 'metric' | 'imperial';
+export interface UnitSchema extends Document {
+  system: UnitSystem;
   name: string;
 }
 
-export interface IItemDefinition extends Document {
+export interface ItemDefinitionSchema extends Document {
   name: string;
-  units: Unit[];
+  units: UnitSchema[];
   averageConsumption: number;
   deleted: boolean;
   createdAt: Date;
   updatedAt?: Date;
 }
 
+const collection = 'item_definitions';
+
+const unitSchema = new Schema(
+  {
+    system: {
+      type: String,
+      enum: Object.values(UnitSystem),
+    },
+    name: String,
+  },
+  { timestamps: true }
+);
+
 const schema = new Schema(
   {
     name: { type: String, required: true, unique: true },
-    units: [
-      {
-        system: { type: String, required: true },
-        name: String,
-      },
-    ],
+    units: [unitSchema],
     averageConsumption: { type: Number, required: true },
     deleted: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
 
-export const ItemDefinition = model<IItemDefinition>(collection, schema);
+export const ItemDefinition = model<ItemDefinitionSchema>(collection, schema);

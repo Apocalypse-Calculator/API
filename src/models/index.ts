@@ -1,4 +1,3 @@
 export * from './user';
-export * from './user_stocks';
-export * from './user-stock-summary';
+export * from './user-stock';
 export * from './item-definition';

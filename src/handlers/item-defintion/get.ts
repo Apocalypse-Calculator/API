@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { ItemDefinitionRepository } from '~/src/storage/repositories/item-definitions';
 import to from 'await-to-js';
-import { IItemDefinition } from '~/src/models';
+import { ItemDefinitionSchema } from '~/src/models';
 
 export const listDefinitions = async (req: Request, resp: Response) => {
   const definitions = await ItemDefinitionRepository.getAll();
@@ -10,7 +10,7 @@ export const listDefinitions = async (req: Request, resp: Response) => {
 
 export const getDefinition = async (req: Request, resp: Response) => {
   const { id } = req.params;
-  const [err, definition] = await to<IItemDefinition>(
+  const [err, definition] = await to<ItemDefinitionSchema>(
     ItemDefinitionRepository.get(id)
   );
 
@@ -29,7 +29,7 @@ export const getDefinition = async (req: Request, resp: Response) => {
 
 export const listDefinitionUnits = async (req: Request, resp: Response) => {
   const { id } = req.params;
-  const [err, definition] = await to<IItemDefinition>(
+  const [err, definition] = await to<ItemDefinitionSchema>(
     ItemDefinitionRepository.get(id)
   );
 

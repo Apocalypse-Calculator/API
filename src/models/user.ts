@@ -7,7 +7,7 @@ export interface IUserLocation {
   country: string;
 }
 
-export interface IUser extends Document {
+export interface UserSchema extends Document {
   email: string;
   password: string;
   provider: string;
@@ -39,4 +39,4 @@ const schema = new Schema(
   { timestamps: true }
 );
 
-export const User = model<IUser>(collection, schema);
+export const User = model<UserSchema>(collection, schema);
