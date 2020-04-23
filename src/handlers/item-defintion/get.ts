@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { ItemDefinitionRepository } from '~/src/storage/repositories/item-definitions';
 import to from 'await-to-js';
-import { ItemDefinitionSchema } from '~/src/types';
+import { ItemDefinitionSchema } from '~/src/models';
 
 export const listDefinitions = async (req: Request, resp: Response) => {
   const definitions = await ItemDefinitionRepository.getAll();

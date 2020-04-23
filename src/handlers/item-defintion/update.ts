@@ -3,7 +3,7 @@ import { to } from 'await-to-js';
 import joi from '@hapi/joi';
 
 import { ItemDefinitionRepository } from '~/src/storage/repositories/item-definitions';
-import { ItemDefinitionSchema } from '~/src/types';
+import { ItemDefinitionSchema } from '~/src/models';
 
 const definitionUpdate = joi.object({
   name: joi.string().min(3).max(50),

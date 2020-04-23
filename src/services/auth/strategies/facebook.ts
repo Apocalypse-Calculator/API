@@ -3,7 +3,7 @@ import passportFacebook from 'passport-facebook';
 import { to } from 'await-to-js';
 import config from '~/src/config';
 import { UserRepository } from '~/src/storage';
-import { IUser } from '~/src/models';
+import { UserSchema } from '~/src/models';
 
 const { Strategy: FacebookStrategy } = passportFacebook;
 
@@ -27,7 +27,7 @@ const verifyCallback: passportFacebook.VerifyFunction = async (
     return done(err, user);
   }
 
-  const [createdError, createdUser] = await to<IUser>(
+  const [createdError, createdUser] = await to<UserSchema>(
     UserRepository.create({
       providerId: profile.id,
       provider: profile.provider,

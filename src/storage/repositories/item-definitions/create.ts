@@ -1,7 +1,6 @@
 import { ItemDefinition } from '~/src/models';
 import { getByName } from './get';
-import { ItemDefinitionRepository } from '.';
-import { ItemDefinitionSchema, UnitSchema } from '~/src/types';
+import { ItemDefinitionSchema, UnitSchema } from '~/src/models';
 
 export const create = async (
   definition: ItemDefinitionSchema

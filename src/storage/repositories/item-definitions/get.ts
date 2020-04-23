@@ -1,5 +1,5 @@
 import { ItemDefinition } from '~/src/models';
-import { ItemDefinitionSchema, UnitSchema } from '~/src/types';
+import { ItemDefinitionSchema, UnitSchema } from '~/src/models';
 
 export const getAll = async (): Promise<ItemDefinitionSchema[]> => {
   return await ItemDefinition.find({ deleted: false });

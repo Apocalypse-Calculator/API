@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import joi from '@hapi/joi';
 import to from 'await-to-js';
-import { IUser } from '~/src/models';
+import { UserSchema } from '~/src/models';
 import { UserRepository } from '~/src/storage';
 import { AuthService } from '~/src/services/auth';
 
@@ -28,7 +28,9 @@ export const registerUser = async (req: Request, resp: Response) => {
   }
   const password = await AuthService.hashPassword(value.password);
   const userData = { ...value, password };
-  const [err, user] = await to<IUser>(UserRepository.create({ ...userData }));
+  const [err, user] = await to<UserSchema>(
+    UserRepository.create({ ...userData })
+  );
   if (err) {
     return resp.status(422).json({ success: false, error: err.message });
   }

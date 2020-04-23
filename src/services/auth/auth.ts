@@ -3,17 +3,17 @@ import jwt from 'jsonwebtoken';
 import config from '~/src/config';
 import bcrypt from 'bcryptjs';
 import { UserRepository } from '~/src/storage';
-import { IUser } from '~/src/models';
+import { UserSchema } from '~/src/models';
 import { to } from 'await-to-js';
 
 interface TokenContent {
-  data: IUser;
+  data: UserSchema;
 }
 
 const { jwtSecret } = config;
 
 const setup = () => {
-  passport.serializeUser((user: IUser, done) => {
+  passport.serializeUser((user: UserSchema, done) => {
     done(null, user._id);
   });
   passport.deserializeUser(async (id: string, done) => {
@@ -25,7 +25,7 @@ const setup = () => {
   });
 };
 
-const signToken = (user: IUser): string => {
+const signToken = (user: UserSchema): string => {
   const content: TokenContent = { data: user };
   return jwt.sign(content, jwtSecret, { expiresIn: '1h' });
 };

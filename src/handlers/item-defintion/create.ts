@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import joi from '@hapi/joi';
 import { to } from 'await-to-js';
 import { ItemDefinitionRepository } from '~/src/storage/repositories/item-definitions';
-import { ItemDefinitionSchema } from '~/src/types';
+import { ItemDefinitionSchema } from '~/src/models';
 
 const schema = joi.object({
   name: joi.string().min(3).max(50).required(),
