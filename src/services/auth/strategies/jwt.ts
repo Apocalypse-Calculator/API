@@ -4,7 +4,7 @@ import passportJWT from 'passport-jwt';
 import { to } from 'await-to-js';
 import config from '~/src/config';
 import { UserRepository } from '~/src/storage';
-import { UserSchema } from '~/src/models';
+import { User } from '~/src/types';
 
 const { jwtSecret } = config;
 const { Strategy: JWTStrategy } = passportJWT;
@@ -14,7 +14,7 @@ const verifyCallback: passportJWT.VerifyCallbackWithRequest = async (
   jwtPayload: any,
   done: passportJWT.VerifiedCallback
 ) => {
-  const [err, user] = await to<UserSchema>(
+  const [err, user] = await to<User>(
     UserRepository.getById(jwtPayload.data._id)
   );
   if (err) {

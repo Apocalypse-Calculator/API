@@ -1,10 +1,10 @@
-import { User } from '~/src/models';
+import { User, StockEntry } from '~/src/types';
+import { User as Model } from '~/src/models';
 
 export const create = async (options: any) => {
-  const { email } = options;
-  const user = await User.findOne({ email });
-  if (user) {
-    throw new Error(`email ${email} already registered`);
-  }
-  return await User.create(options);
+  return await Model.create(options);
+};
+
+export const addStockEntry = async (user: User, options: StockEntry) => {
+  user.stock_entries.push(options);
 };

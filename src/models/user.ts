@@ -1,27 +1,17 @@
-import { model, Schema, Document } from 'mongoose';
+import { model, Schema } from 'mongoose';
+import { User as UserSchema, StockEntry } from '~/src/types';
 
-const collection = 'users';
+const stockingSchema = new Schema<StockEntry>(
+  {
+    item: { type: String, ref: 'item_definitions', required: true },
+    quantity: { type: Number, required: true },
+    daysTillShopping: { type: Number },
+    estimatedDaysRemaining: { type: Number },
+  },
+  { timestamps: true }
+);
 
-export interface IUserLocation {
-  city: string;
-  country: string;
-}
-
-export interface UserSchema extends Document {
-  email: string;
-  password: string;
-  provider: string;
-  providerId: string;
-  firstName: string;
-  lastName: string;
-  displayName: string;
-  householdSize: number;
-  location: IUserLocation;
-  createdAt: Date;
-  updatedAt?: Date;
-}
-
-const schema = new Schema(
+const schema = new Schema<UserSchema>(
   {
     email: String,
     password: String,
@@ -35,8 +25,9 @@ const schema = new Schema(
       city: String,
       country: String,
     },
+    stockings: [stockingSchema],
   },
   { timestamps: true }
 );
 
-export const User = model<UserSchema>(collection, schema);
+export const User = model<UserSchema>('users', schema);
