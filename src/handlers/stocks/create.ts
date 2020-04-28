@@ -5,10 +5,10 @@ import { UserRepository } from '~/src/storage/repositories';
 import { to } from 'await-to-js';
 
 const schema = joi.object({
-  entries: joi
+  items: joi
     .array()
     .items({
-      item: joi.string().required(),
+      name: joi.string().required(),
       quantity: joi.number().min(0),
     })
     .min(1),

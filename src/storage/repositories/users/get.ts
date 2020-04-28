@@ -21,8 +21,8 @@ const getByProviderId = async (providerId: string) => {
 };
 
 const getLatestStockEntry = (user: User): StockEntry => {
-  if (user.stock_entries.length > 0) {
-    return user.stock_entries[user.stock_entries.length - 1];
+  if (user.stocks.length > 0) {
+    return user.stocks[user.stocks.length - 1];
   }
   return null;
 };
@@ -30,11 +30,14 @@ const getLatestStockEntry = (user: User): StockEntry => {
 const queryStockEntries = (
   user: User,
   startDate: moment.Moment,
-  endDate: moment.Moment
+  endDate: moment.Moment,
+  limit: number = 100
 ): StockEntry[] => {
-  return user.stock_entries.filter((stocking) => {
-    return moment(stocking.createdAt).isBetween(startDate, endDate);
-  });
+  return user.stocks
+    .filter((stocking) => {
+      return moment(stocking.createdAt).isBetween(startDate, endDate);
+    })
+    .slice(0, limit);
 };
 
 export {

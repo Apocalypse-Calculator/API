@@ -1,12 +1,16 @@
 import { model, Schema } from 'mongoose';
-import { User as UserSchema, StockEntry } from '~/src/types';
+import { User as UserSchema, StockEntry, Item } from '~/src/types';
 
-const stockingSchema = new Schema<StockEntry>(
+const itemStockSchema = new Schema<Item>({
+  name: { type: String, ref: 'item_definitions', required: true },
+  quantity: { type: Number, required: true },
+  estimatedDaysRemaining: Number,
+});
+
+const entriesSchema = new Schema<StockEntry>(
   {
-    item: { type: String, ref: 'item_definitions', required: true },
-    quantity: { type: Number, required: true },
+    items: [itemStockSchema],
     daysTillShopping: { type: Number },
-    estimatedDaysRemaining: { type: Number },
   },
   { timestamps: true }
 );
@@ -20,12 +24,12 @@ const schema = new Schema<UserSchema>(
     firstName: String,
     lastName: String,
     displayName: String,
-    householdSize: Number,
+    householdSize: { type: Number, default: 1 },
     location: {
       city: String,
       country: String,
     },
-    stockings: [stockingSchema],
+    stocks: [entriesSchema],
   },
   { timestamps: true }
 );

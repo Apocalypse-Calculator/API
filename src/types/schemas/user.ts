@@ -1,10 +1,14 @@
 import { Document, Types } from 'mongoose';
 
-export interface StockEntry extends Types.Subdocument {
-  item: string;
+export interface Item extends Types.Subdocument {
+  name: string;
   quantity: number;
-  daysTillShopping: number;
   estimatedDaysRemaining: number;
+}
+
+export interface StockEntry extends Types.Subdocument {
+  items: Types.DocumentArray<Item>;
+  daysTillShopping: number;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -26,5 +30,5 @@ export interface User extends Document {
   location: Location;
   createdAt: Date;
   updatedAt?: Date;
-  stock_entries: Types.DocumentArray<StockEntry>;
+  stocks: Types.DocumentArray<StockEntry>;
 }

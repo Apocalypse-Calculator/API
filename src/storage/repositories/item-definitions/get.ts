@@ -12,3 +12,9 @@ export const get = async (id: string): Promise<ItemDefinition> => {
 export const getByName = async (name: string): Promise<ItemDefinition> => {
   return await Model.findOne({ name, deleted: false });
 };
+
+export const queryByNames = async (
+  names: string[]
+): Promise<ItemDefinition[]> => {
+  return await Model.find({ name: { $in: names } });
+};
