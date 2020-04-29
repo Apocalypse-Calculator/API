@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "pinging",
+			"name": "ping",
 			"item": [
 				{
 					"name": "ping server",
@@ -31,7 +31,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "authorizing",
+			"name": "users",
 			"item": [
 				{
 					"name": "Registration",
@@ -40,7 +40,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"elnahas.ahmed+new20@gmail.com\",\n\t\"password\": \"password\"\n}",
+							"raw": "{\n\t\"email\": \"test@getrestock.com\",\n\t\"password\": \"password\",\n\t\"password_confirm\": \"password\",\n\t\"first_name\": \"Tester\",\n\t\"last_name\": \"Tester\",\n\t\"display_name\": \"Tester Tester\",\n\t\"location\": {\n\t\t\"city\": \"Toronto\",\n\t\t\"country\": \"Canada\"\n\t}\n\t\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -57,9 +57,123 @@
 								"register"
 							]
 						},
-						"description": "# Registration Endpoint \n\nPOST endpoint\nRegisters a user via email and password \n\n\n## Parameters \n\n\n| parameter   \t| type   \t| required? \t| description                                 \t| example                                                   \t|\n| :---\t| :---\t| :---\t| :---\t| :---\t|\n| email       \t| string \t| yes       \t| users email                                 \t| bob@gmail.com                                             \t|\n| password    \t| string \t| yes       \t| users password                              \t| BobIsCool                                                 \t|\n| displayName \t| string \t| no        \t| user's display name in the app / web        \t| Bob Smith                                                 \t|\n| location    \t| object \t| no        \t| contains user location ( city and country ) \t| {  \"city\" : \"Toronto\",  \"country\": \"Canada\"} \t|\n\n\n## Repsonse\nWill respond back with user info if created, otherwise with validation errors."
+						"description": "# Registration Endpoint \n\nPOST endpoint\nRegisters a user via email and password \n\n\n## Parameters \n\n\n| parameter   \t| type   \t| required? \t| description                                 \t| example                                                   \t|\n| :---\t| :---\t| :---\t| :---\t| :---\t|\n| email       \t| string \t| yes       \t| users email                                 \t| bob@gmail.com |\n| password    \t| string \t| yes       \t| user's password                              \t| password |\n| password_confim | string  | yes\t\t\t| user password confirmation\t\t\t\t\t| password |\n| first_name    | string    | no\t\t\t| user first name\t\t\t\t\t\t\t    | Bob  |\n| last_name\t\t| string    | no\t\t\t\t| user's last name\t\t\t\t\t\t\t\t| Smith |\n| displayName \t| string \t| no        \t| user's display name in the app / web        \t| Bob Smith |                         \n| location    \t| object \t| no        \t| contains user location ( city and country ) \t| {  \"city\" : \"Toronto\",  \"country\": \"Canada\"} \t|\n\n\n## Repsonse\nWill respond back with user info if created, otherwise with validation errors."
 					},
 					"response": [
+						{
+							"name": "Registration with full body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"test@getrestock.com\",\n\t\"password\": \"password\",\n\t\"password_confirm\": \"password\",\n\t\"first_name\": \"Tester\",\n\t\"last_name\": \"Tester\",\n\t\"display_name\": \"Tester Tester\",\n\t\"location\": {\n\t\t\"city\": \"Toronto\",\n\t\t\"country\": \"Canada\"\n\t}\n\t\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "244"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"f4-y1dIV5KmBqcVQlSEAWT4NlVuAQw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 29 Apr 2020 22:28:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"user\": {\n        \"householdSize\": 1,\n        \"email\": \"test@getrestock.com\",\n        \"location\": {\n            \"city\": \"Toronto\",\n            \"country\": \"Canada\"\n        },\n        \"stocks\": [],\n        \"createdAt\": \"2020-04-29T22:28:12.000Z\",\n        \"updatedAt\": \"2020-04-29T22:28:12.000Z\",\n        \"id\": \"5ea9ff7b3ce47f41fd7fcdbe\"\n    }\n}"
+						},
+						{
+							"name": "Registration with missing information",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"test@getrestock.com\",\n\t\"password_confirm\": \"password\",\n\t\"first_name\": \"Tester\",\n\t\"last_name\": \"Tester\",\n\t\"display_name\": \"Tester Tester\",\n\t\"location\": {\n\t\t\"city\": \"Toronto\",\n\t\t\"country\": \"Canada\"\n\t}\n\t\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "113"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"71-cq7lIwQQGjnhKxtjbAfmHxIYrj8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 29 Apr 2020 22:53:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        \"\\\"password is required\\\" is required\",\n        \"\\\"password_confirm\\\" must be [ref:password]\"\n    ],\n    \"success\": false\n}"
+						},
 						{
 							"name": "Registration",
 							"originalRequest": {
@@ -126,7 +240,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"elnahas.ahmed+new20@gmail.com\",\n\t\"password\": \"password\"\n}",
+							"raw": "{\n\t\"email\": \"test@getrestock.com\",\n\t\"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -146,6 +260,67 @@
 						"description": "# Login Via User email and password\n\nThis endpoint is intended to be called to login the user with an existing email and password\n\n\n## Request Parameters\n\n\n| parameter \t| type \t| required? \t| description \t| example \t|\n| :---\t| :---\t| :----\t| :---\t| :---\t|\n| email \t| string \t| yes \t| users email \t| bob@gmail.com \t|\n| password \t| string \t| yes \t| users password \t| BobIsCool \t|\n\n\n\n## Response\n\nIf successful it will generate a JWT token with 1 hour expiry time, and the token will be placed in the header of the response."
 					},
 					"response": [
+						{
+							"name": "Successful login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"test@getrestock.com\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "jwt",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImxvY2F0aW9uIjp7ImNpdHkiOiJUb3JvbnRvIiwiY291bnRyeSI6IkNhbmFkYSJ9LCJob3VzZWhvbGRTaXplIjoxLCJfaWQiOiI1ZWE5ZmY3YjNjZTQ3ZjQxZmQ3ZmNkYmUiLCJlbWFpbCI6InRlc3RAZ2V0cmVzdG9jay5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCRiWHQvZFF2RlB4RzgvY2Frdk5sNmkuNTRNeUMxY0J5TzRONHp6dmY3eWJMU1RwWGplV0RCNiIsInN0b2NrcyI6W10sImNyZWF0ZWRBdCI6IjIwMjAtMDQtMjlUMjI6Mjg6MTIuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjAtMDQtMjlUMjI6Mjg6MTIuMDAwWiIsIl9fdiI6MH0sImlhdCI6MTU4ODE5OTM0NSwiZXhwIjoxNTg4MjAyOTQ1fQ.GJmplC_qoOoX-PoV6NFF8coVmgWdSbWJ3znk4WBRRf4"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "244"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"f4-JxwOCDyzF7V9WWqXkL7DJmk11EQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 29 Apr 2020 22:29:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"user\": {\n        \"location\": {\n            \"city\": \"Toronto\",\n            \"country\": \"Canada\"\n        },\n        \"householdSize\": 1,\n        \"email\": \"test@getrestock.com\",\n        \"stocks\": [],\n        \"createdAt\": \"2020-04-29T22:28:12.000Z\",\n        \"updatedAt\": \"2020-04-29T22:28:12.000Z\",\n        \"id\": \"5ea9ff7b3ce47f41fd7fcdbe\"\n    }\n}"
+						},
 						{
 							"name": "Auth via email / password",
 							"originalRequest": {
@@ -190,6 +365,63 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"success\": true,\n    \"user\": {\n        \"updatedAt\": null,\n        \"confirmedAt\": null,\n        \"confirmationSentAt\": null,\n        \"email\": \"bob@gmail.com\",\n        \"createdAt\": \"2020-04-04T18:39:13.115Z\",\n        \"id\": \"5e88d45147ed610acb7fc361\"\n    }\n}"
+						},
+						{
+							"name": "Login wrong authentication",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"test@getrestock.com\",\n\t\"password\": \"bad password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "68"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"44-hi4EYyVx145YXRUKpEdaG717+vg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 29 Apr 2020 22:29:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"authentication failed, wrong credentials\"\n}"
 						}
 					]
 				},
@@ -260,9 +492,873 @@
 							"body": "{\n    \"user\": {\n        \"updatedAt\": null,\n        \"confirmedAt\": null,\n        \"confirmationSentAt\": null,\n        \"_id\": \"5e88d45147ed610acb7fc361\",\n        \"email\": \"elnahas.ahmed+new11@gmail.com\",\n        \"createdAt\": \"2020-04-04T18:39:13.115Z\",\n        \"__v\": 0\n    }\n}"
 						}
 					]
+				},
+				{
+					"name": "facebook oauth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/auth/facebook",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"auth",
+								"facebook"
+							]
+						},
+						"description": "# Facebook Oauth route\n\nThis is a get route that will initiate the authentication by redirecting the user to facebook where they can sign in . there will be pair call done by facebook on /auth/facebook/callback that will finialize the registration / authentication and return a jwt token"
+					},
+					"response": []
 				}
 			],
 			"description": "# Authorizing\n\nEndpoints to manage user registration , authentication , password resets ... etc. \n\n",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "item-definitions",
+			"item": [
+				{
+					"name": "units",
+					"item": [
+						{
+							"name": "list definition units",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/item-definitions/:def-id/units",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"item-definitions",
+										":def-id",
+										"units"
+									],
+									"variable": [
+										{
+											"key": "def-id",
+											"value": "5e91fa397631410051ab5609",
+											"description": "definition id"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "list definition units",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/item-definitions/:def-id/units",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"item-definitions",
+												":def-id",
+												"units"
+											],
+											"variable": [
+												{
+													"key": "def-id",
+													"value": "5e91fa397631410051ab5609",
+													"description": "definition id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "75"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"4b-f0cABDJHJYAc11bR2ZeHLx1AO0Q\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 11 Apr 2020 20:08:34 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"units\": [\n        {\n            \"_id\": \"5e91fa397631410051ab560a\",\n            \"system\": \"metric\",\n            \"name\": \"L\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "get definition unit",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/item-definitions/:id/units/:unit-id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"item-definitions",
+										":id",
+										"units",
+										":unit-id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5e91fa397631410051ab5609",
+											"description": "id of the definition"
+										},
+										{
+											"key": "unit-id",
+											"value": "5e91fa397631410051ab560a",
+											"description": "id of the unit belonging to the definition"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get definition unit",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/item-definitions/:id/units/:unit-id",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"item-definitions",
+												":id",
+												"units",
+												":unit-id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "5e91fa397631410051ab5609",
+													"description": "id of the definition"
+												},
+												{
+													"key": "unit-id",
+													"value": "5e91fa397631410051ab560a",
+													"description": "id of the unit belonging to the definition"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "72"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"48-eQYv/FRphyNMt4Sa92Im6czEZDg\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 11 Apr 2020 20:10:41 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"unit\": {\n        \"_id\": \"5e91fa397631410051ab560a\",\n        \"system\": \"metric\",\n        \"name\": \"L\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "add unit to definition",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"system\": \"METRIC\",\n\t\"name\": \"Liter\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/item-definitions/:id/units",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"item-definitions",
+										":id",
+										"units"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5e91fa2fbb224f0b2112ce1b",
+											"description": "definition id"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "add unit to definition",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"system\": \"metric\",\n\t\"name\": \"Liter\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/item-definitions/:id/units",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"item-definitions",
+												":id",
+												"units"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "5e91fa397631410051ab5609",
+													"description": "definition id"
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "58"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"3a-f2bQKjtpZx1UpCfbqHuOlzK8HZM\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 11 Apr 2020 20:24:06 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"unit\": {\n        \"system\": \"metric\",\n        \"name\": \"Liter\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "delete a unit",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/item-definitions/:id/units/:unit-id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"item-definitions",
+										":id",
+										"units",
+										":unit-id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5e91fa397631410051ab5609",
+											"description": "definition id"
+										},
+										{
+											"key": "unit-id",
+											"value": "5e91fa397631410051ab560a",
+											"description": "definition unit id"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "delete a unit",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/item-definitions/:id/units/:unit-id",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"item-definitions",
+												":id",
+												"units",
+												":unit-id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "5e91fa397631410051ab5609",
+													"description": "definition id"
+												},
+												{
+													"key": "unit-id",
+													"value": "5e91fa397631410051ab560a",
+													"description": "definition unit id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 11 Apr 2020 20:34:08 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Content-Length",
+											"value": "0"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"description": "# Definition units\n\nget the defined units for a particular definition",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "add definition",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"water\",\n\t\"units\": [\n\t\t{\n\t\t\t\"system\": \"metric\",\n\t\t\t\"name\": \"L\"\n\t\t}\n\t ],\n\t \"averageConsumption\": 0.69\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/item-definitions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"item-definitions"
+							]
+						},
+						"description": "# Add New Definition\n\n- Adds a new definition. will not allow duplicate item definition names "
+					},
+					"response": [
+						{
+							"name": "add definition",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"water\",\n\t\"units\": [\n\t\t{\n\t\t\t\"system\": \"metric\",\n\t\t\t\"name\": \"L\"\n\t\t}\n\t ],\n\t \"averageConsumption\": 0.69\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/item-definitions",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"item-definitions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "266"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"10a-cJcvVBzKEmCDYDX9wrdcafFNiv8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 11 Apr 2020 16:45:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"definition\": {\n        \"deleted\": false,\n        \"_id\": \"5e91f1fd2aaeb7f9f80974fd\",\n        \"name\": \"water\",\n        \"units\": [\n            {\n                \"_id\": \"5e91f1fd2aaeb7f9f80974fe\",\n                \"system\": \"metric\",\n                \"name\": \"L\"\n            }\n        ],\n        \"averageConsumption\": 0.69,\n        \"createdAt\": \"2020-04-11T16:36:13.963Z\",\n        \"updatedAt\": \"2020-04-11T16:36:13.963Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "list definitions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/item-definitions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"item-definitions"
+							]
+						},
+						"description": "list all possible definitions"
+					},
+					"response": [
+						{
+							"name": "list definitions",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/item-definitions",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"item-definitions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "269"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"10d-McBCWqh0lbD0AR1ZxiVG1QOGAMU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 11 Apr 2020 16:47:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"definitions\": [\n        {\n            \"deleted\": false,\n            \"_id\": \"5e91f1fd2aaeb7f9f80974fd\",\n            \"name\": \"water\",\n            \"units\": [\n                {\n                    \"_id\": \"5e91f1fd2aaeb7f9f80974fe\",\n                    \"system\": \"metric\",\n                    \"name\": \"L\"\n                }\n            ],\n            \"averageConsumption\": 0.69,\n            \"createdAt\": \"2020-04-11T16:36:13.963Z\",\n            \"updatedAt\": \"2020-04-11T16:36:13.963Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "delete definition",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/item-definitions/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"item-definitions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5e91f1fd2aaeb7f9f80974fd",
+									"description": "id of the definition to be deleted"
+								}
+							]
+						},
+						"description": "soft delete definition"
+					},
+					"response": [
+						{
+							"name": "delete definition",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/item-definitions/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"item-definitions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5e91f1fd2aaeb7f9f80974fd",
+											"description": "id of the definition to be deleted"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 11 Apr 2020 17:06:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "update definition overall",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"water\",\n\t\"averageConsumption\": 0.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/item-definitions/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"item-definitions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5e91fa397631410051ab5609"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update definition overall",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"water\",\n\t\"averageConsumption\": 0.5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/item-definitions/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"item-definitions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5e91fa397631410051ab5609"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "281"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"119-8FfIYDXCuLpMtBVB65AdenYqzbg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 11 Apr 2020 17:13:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"definition\": {\n        \"deleted\": false,\n        \"_id\": \"5e91fa397631410051ab5609\",\n        \"name\": \"water\",\n        \"units\": [\n            {\n                \"_id\": \"5e91fa397631410051ab560a\",\n                \"system\": \"metric\",\n                \"name\": \"L\"\n            }\n        ],\n        \"averageConsumption\": 0.69,\n        \"createdAt\": \"2020-04-11T17:11:21.855Z\",\n        \"updatedAt\": \"2020-04-11T17:11:21.855Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get definition",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": [
+						{
+							"name": "get definition",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/item-definitions/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"item-definitions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5e91fa2fbb224f0b2112ce1b",
+											"description": "definition id "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "200"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"c8-EdXKc6oqt/vxvs79gdq3ghUio+g\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 11 Apr 2020 19:30:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"definition\": {\n        \"deleted\": false,\n        \"_id\": \"5e91fa2fbb224f0b2112ce1b\",\n        \"name\": \"WBL\",\n        \"__v\": 0,\n        \"averageConsumption\": 0.5,\n        \"createdAt\": \"2020-04-11T17:11:10.789Z\",\n        \"updatedAt\": \"2020-04-11T17:14:40.919Z\",\n        \"units\": []\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "# Item Definitions Endpoint\n\nThis endpoint was made to support adding more item kinds, that hold the :\n1 - Item Name ( e.g. water , sanitizer, toilet paper)\n2 - Units  a list of measuring units ( L , oz, kg, lb ... etc)\n3 - averageConsumption average consumption by a person as obtained from statistical data\n\n\n",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "stocks",
+			"item": [
+				{
+					"name": "get last entry",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add stocks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImhvdXNlaG9sZFNpemUiOjEsIl9pZCI6IjVlYTdhNTk2ZDQ2N2Y1ZDQ4ZjI2ZmY4ZCIsImVtYWlsIjoiZWxuYWhhcy5haG1lZDJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkbmtjczllRUZRSE9wcEp0L2lPM0xwdVBoemt0NWhzLmQwZlVPd1lTT3NqZ3lSNzQvN20zWHEiLCJzdG9ja3MiOltdLCJjcmVhdGVkQXQiOiIyMDIwLTA0LTI4VDAzOjQwOjA2LjE1MVoiLCJ1cGRhdGVkQXQiOiIyMDIwLTA0LTI4VDAzOjQwOjA2LjE1MVoiLCJfX3YiOjB9LCJpYXQiOjE1ODgwNDUyMDksImV4cCI6MTU4ODA0ODgwOX0._36Pd8a_HazX8QnR9mc72OjM-44R90a_443llubEwF8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"items\": [\n\t\t{\n\t\t\t\"name\": \"water\",\n\t\t\t\"quantity\": 5\n\t\t}\n    ],\n    \"daysTillShopping\": 15\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/stocks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"stocks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get latest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list and query stocks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
 			"protocolProfileBehavior": {}
 		}
 	],
@@ -293,13 +1389,13 @@
 	],
 	"variable": [
 		{
-			"id": "89ae6e48-dccd-4091-bad8-432f2655e12f",
+			"id": "84e48419-92d5-404d-b000-3cd715949403",
 			"key": "base_url",
 			"value": "http://localhost:9000/.netlify/functions",
 			"type": "string"
 		},
 		{
-			"id": "965ca8c6-5122-497d-860d-0d308118d948",
+			"id": "d8182d78-608e-4842-93ac-233687ef2588",
 			"key": "\n",
 			"value": "",
 			"type": "string",

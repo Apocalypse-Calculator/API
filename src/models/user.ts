@@ -17,7 +17,7 @@ const entriesSchema = new Schema<StockEntry>(
 
 const schema = new Schema<UserSchema>(
   {
-    email: String,
+    email: { type: String, required: true, unique: true },
     password: String,
     provider: String,
     providerId: String,

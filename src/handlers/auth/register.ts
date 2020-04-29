@@ -7,8 +7,8 @@ import { AuthService } from '~/src/services/auth';
 
 const schema = joi.object({
   email: joi.string().email().required(),
-  password: joi.string(),
-  password_confirm: joi.ref('password'),
+  password: joi.string().required().label('password is required'),
+  password_confirm: joi.string().required().valid(joi.ref('password')),
   first_name: joi.string().optional(),
   last_name: joi.string().optional(),
   display_name: joi.string().optional(),
