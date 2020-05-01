@@ -1,17 +1,11 @@
 import { Request, Response, Router } from 'express';
-import mongoose from 'mongoose';
+import { dbConnectionStatus } from '~/src/storage';
 
-const DBStatus = {
-  0: 'disconnected',
-  1: 'connected',
-  2: 'connecting',
-  3: 'disconnecting',
-};
-
-const ping = async (req: Request, resp: Response): Promise<void> => {
-  const mongoDB = DBStatus[mongoose.connection.readyState];
-  resp.json({
-    status: { mongoDB },
+export const ping = async (req: Request, resp: Response): Promise<void> => {
+  const db = dbConnectionStatus();
+  const code = db === 'connected' ? 200 : 500;
+  resp.status(code).json({
+    status: { db },
   });
 };
 

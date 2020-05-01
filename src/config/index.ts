@@ -12,6 +12,7 @@ const dbConnection: DBConnection = {
 };
 
 export default {
+  environment: process.env.NODE_ENV || 'development',
   database: dbConnection,
   jwtSecret: process.env.JWT_SECRET,
   basePath: process.env.BASE_PATH || '/.netlify/functions',
