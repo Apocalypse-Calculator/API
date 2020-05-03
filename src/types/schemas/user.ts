@@ -32,3 +32,16 @@ export interface User extends Document {
   updatedAt?: Date;
   stocks: Types.DocumentArray<StockEntry>;
 }
+
+export interface CreateUserOptions {
+  email: string;
+  password?: string;
+  confirm_password?: string;
+  first_name?: string;
+  last_name?: string;
+  display_name?: string;
+  household_size?: number;
+  location?: Location;
+  providerId?: string;
+  provider?: string;
+}

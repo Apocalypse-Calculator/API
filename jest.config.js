@@ -10,8 +10,10 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
   },
   testEnvironment: 'node',
+  testRegex: '(/__tests__/|.*.(test|spec))\\.ts$',
   moduleFileExtensions: ['tsx', 'ts', 'js', 'json', 'node'],
-  modulePathIgnorePatterns: ['fixtures.ts'],
+  modulePathIgnorePatterns: ['integration.test.ts'],
+
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
 

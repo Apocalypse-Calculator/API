@@ -1,9 +1,27 @@
-import { User, StockEntry, Item } from '~/src/types';
+import { User, StockEntry, Item, CreateUserOptions } from '~/src/types';
 import { User as Model } from '~/src/models';
 import { ItemDefinitionRepository } from '../item-definitions';
 
-export const create = async (options: any) => {
-  return await Model.create(options);
+export const create = async (options: CreateUserOptions) => {
+  const {
+    email,
+    password,
+    first_name: firstName,
+    last_name: lastName,
+    display_name: displayName,
+    household_size: householdSize,
+    location,
+  } = options;
+
+  return await Model.create({
+    email,
+    password,
+    firstName,
+    lastName,
+    displayName,
+    householdSize,
+    location,
+  });
 };
 
 export const addStockEntry = async (user: User, entry: StockEntry) => {
