@@ -8,11 +8,13 @@ describe('login user handler', () => {
   const getEmailSpy = jest.spyOn(UserRepository, 'getByEmail');
   const serializeSpy = jest.spyOn(UserRepository, 'serialize');
   const verifyPassword = jest.spyOn(AuthService, 'verifyPassword');
+  const signTokenSpy = jest.spyOn(AuthService, 'signToken');
 
   it('WHEN credentials valid, it returns jwt token', async () => {
     getEmailSpy.mockResolvedValueOnce(MongoUser);
-    verifyPassword.mockResolvedValue(true);
-    serializeSpy.mockReturnValue(MongoUser);
+    verifyPassword.mockResolvedValueOnce(true);
+    serializeSpy.mockReturnValueOnce(MongoUser);
+    signTokenSpy.mockReturnValue('jwt-signed-token');
 
     const request = httpMocks.createRequest({
       method: 'POST',
@@ -28,8 +30,7 @@ describe('login user handler', () => {
     const code = response._getStatusCode();
     const headers = response._getHeaders();
     expect(code).toBe(200);
-    expect(headers).toHaveProperty('jwt');
-    expect(headers.jwt.length).toBeGreaterThan(0);
+    expect(headers.jwt).toBe('jwt-signed-token');
   });
 
   it('WHEN wrong credentials, it returns errors ', async () => {
