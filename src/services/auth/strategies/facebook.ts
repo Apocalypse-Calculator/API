@@ -31,9 +31,9 @@ const verifyCallback: passportFacebook.VerifyFunction = async (
     UserRepository.create({
       providerId: profile.id,
       provider: profile.provider,
-      firstName: profile.name.givenName,
-      lastName: profile.name.familyName,
-      displayName: profile.displayName,
+      first_name: profile.name.givenName,
+      last_name: profile.name.familyName,
+      display_name: profile.displayName,
       email: profile.emails[0].value,
     })
   );

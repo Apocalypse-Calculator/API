@@ -6,8 +6,16 @@ import { UserRepository } from '~/src/storage';
 import { AuthService } from '~/src/services/auth';
 
 const schema = joi.object({
-  email: joi.string().email().required(),
-  password: joi.string().required(),
+  email: joi.string().email().required().messages({
+    'string.email': 'invalid email',
+    'string.base': 'invalid email',
+    'any.required': 'email is required',
+    'string.empty': 'email is required',
+  }),
+  password: joi.string().required().messages({
+    'any.required': 'password is required',
+    'string.empty': 'password cant be empty',
+  }),
 });
 
 export const login = async (req: Request, resp: Response) => {

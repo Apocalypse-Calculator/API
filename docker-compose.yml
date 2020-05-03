@@ -1,22 +1,29 @@
-version: "3.7"
+version: '3.7'
 services:
-  mongo:
+  mongodb:
     image: mongo:3.6.17-xenial
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - data-volume:/data/db
-  functions:
-    build: .
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - "./functions:/usr/src/app/functions"
-      - "./package.json:/usr/src/app/package.json"
+      - './src:/user/src/app/src'
+    hostname: restock-api
     ports:
-      - "9000:9000"
-    environment:
-      - MONGO_URL="mongodb://localhost:27017"
+      - '9000:9000'
     depends_on:
-      - mongo
+      - mongodb
+    environment:
+      - NODE_ENV=docker
+    command: >
+      bash -c "
+        yarn watch
+      "
 
 volumes:
   data-volume:
