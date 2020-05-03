@@ -4,6 +4,7 @@ import { login } from './login';
 import passport from 'passport';
 import { getCurrentUser } from './current-user';
 import { facebookCallback } from './facebook';
+import { googleCallback } from './google';
 
 const router = Router();
 router.post('/register', registerUser);
@@ -27,5 +28,21 @@ router.get(
     scope: ['email'],
   }),
   facebookCallback
+);
+
+router.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email',
+    ],
+  })
+);
+
+router.get(
+  '/auth/google/callback',
+  passport.authenticate('google'),
+  googleCallback
 );
 export default router;
