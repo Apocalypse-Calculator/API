@@ -6,6 +6,7 @@ const initAuthentication = (app: Application) => {
   AuthService.setup();
   strategies.JWTStrategy();
   strategies.FacebookStrategy();
+  strategies.GoogleStrategy();
 };
 
 export { AuthService, strategies, initAuthentication };
