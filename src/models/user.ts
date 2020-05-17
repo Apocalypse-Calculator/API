@@ -1,19 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { User as UserSchema, StockEntry, Item } from '~/src/types';
-
-const itemStockSchema = new Schema<Item>({
-  name: { type: String, ref: 'item_definitions', required: true },
-  quantity: { type: Number, required: true },
-  estimatedDaysRemaining: Number,
-});
-
-const entriesSchema = new Schema<StockEntry>(
-  {
-    items: [itemStockSchema],
-    daysTillShopping: { type: Number },
-  },
-  { timestamps: true }
-);
+import { entriesSchema } from './stock';
 
 const schema = new Schema<UserSchema>(
   {

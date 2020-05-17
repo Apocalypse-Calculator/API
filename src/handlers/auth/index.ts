@@ -5,6 +5,7 @@ import passport from 'passport';
 import { getCurrentUser } from './current-user';
 import { facebookCallback } from './facebook';
 import { googleCallback } from './google';
+import { twitterCallback } from './twitter';
 
 const router = Router();
 router.post('/register', registerUser);
@@ -44,5 +45,13 @@ router.get(
   '/auth/google/callback',
   passport.authenticate('google'),
   googleCallback
+);
+
+router.get('/auth/twitter', passport.authenticate('twitter'));
+
+router.get(
+  '/auth/twitter/callback',
+  passport.authenticate('twitter'),
+  twitterCallback
 );
 export default router;

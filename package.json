@@ -17,6 +17,7 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongodb-client-encryption": "^1.0.1",
@@ -25,6 +26,7 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
     "passport-jwt": "^4.0.0",
+    "passport-twitter": "^1.0.4",
     "serverless-http": "^2.3.2"
   },
   "devDependencies": {
@@ -41,6 +43,7 @@
     "@types/passport-facebook": "^2.1.9",
     "@types/passport-google-oauth": "^1.0.41",
     "@types/passport-jwt": "^3.0.3",
+    "@types/passport-twitter": "^1.0.34",
     "@types/sinon": "^9.0.0",
     "@types/supertest": "^2.0.8",
     "faker": "^4.1.0",

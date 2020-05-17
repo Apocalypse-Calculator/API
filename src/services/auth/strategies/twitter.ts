@@ -1,21 +1,21 @@
 import passport from 'passport';
 import {
-  OAuth2Strategy,
+  Strategy as TwitterStrategy,
+  IStrategyOptionBase,
   Profile,
-  VerifyFunction,
-  IOAuth2StrategyOption,
-} from 'passport-google-oauth';
+} from 'passport-twitter';
 import config from '~/src/config';
 import { to } from 'await-to-js';
-import { UserRepository } from '~/src/storage';
 import { User } from '~/src/types';
+import { UserRepository } from '~/src/storage';
 
 const verifyCallback = async (
   accessToken: string,
   refreshToken: string,
   profile: Profile,
-  done: VerifyFunction
+  done: (error: any, user?: any) => void
 ) => {
+  console.log(profile);
   const conditions = [
     {
       providerId: profile.id,
@@ -42,17 +42,13 @@ const verifyCallback = async (
   return done(createdError, createdUser);
 };
 
-const strategy = () => {
-  const { serverAPIUrl, google } = config;
-  const { clientID, clientSecret } = google;
-
-  const options: IOAuth2StrategyOption = {
-    clientID,
-    clientSecret,
-    callbackURL: `${serverAPIUrl}/users/auth/google/callback`,
+export const strategy = () => {
+  const { twitter, serverAPIUrl } = config;
+  const { consumerKey, consumerSecret } = twitter;
+  const options: IStrategyOptionBase = {
+    consumerKey,
+    consumerSecret,
+    callbackURL: `${serverAPIUrl}/users/auth/twitter/callback`,
   };
-
-  passport.use(new OAuth2Strategy(options, verifyCallback));
+  passport.use(new TwitterStrategy(options, verifyCallback));
 };
-
-export { strategy };
