@@ -17,10 +17,10 @@ export const calculate = async (
     quantity / (definition.averageConsumption * peopleCount)
   );
 
-  const estimatedDaysToShop = estimatedDaysToLast - daysTillShopping;
+  const shoppingTimeAdjustment = daysTillShopping - estimatedDaysToLast;
   return {
     estimatedDaysToLast,
-    estimatedDaysToShop,
+    shoppingTimeAdjustment,
   };
 };
 
